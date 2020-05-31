@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
+app.get("/charge", (req, res) => {
   res.status(200).json("Welcome to payment microservice!");
 });
 
