@@ -21,7 +21,11 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
 
-const PORT = process.env.port || 8004;
+app.get("/", (req, res) => {
+  res.status(200).json("Welcome to payment microservice!");
+});
+
+const PORT = process.env.port || 8002;
 
 app.listen(PORT, () => {
   console.log(`Server running at port ${PORT}`);
