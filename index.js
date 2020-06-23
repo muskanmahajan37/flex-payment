@@ -1,9 +1,8 @@
-require("dotenv").config();
-const express = require("express");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-const cors = require("cors");
-const mongoose = require("mongoose");
-const morgan = require("morgan");
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -19,7 +18,15 @@ mongoose.connect(
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-app.use(morgan("dev"));
+app.use(morgan('dev'));
+
+app.use('/payment', require('./api/routes/PaymentRouter'));
+
+app.get('/', (req, res) => {
+  res.status(200).json({
+    api: 'v.1',
+  });
+});
 
 app.get("/charge", (req, res) => {
   res.status(200).json("Welcome to payment microservice!");
