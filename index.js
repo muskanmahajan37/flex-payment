@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 app.use('/payments', require('./api/routes/PaymentRouter'));
 app.use('/customers', require('./api/routes/CustomerRouter'));
 
-const PORT = process.env.port || 8002;
+const PORT = process.env.port || 8004;
 
 app.listen(PORT, () => {
   console.log(`Server running at port ${PORT}`);
