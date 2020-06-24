@@ -31,7 +31,6 @@ app.use('/customers', require('./api/routes/CustomerRouter'));
 
 const PORT = process.env.port || 8004;
 
-
 app.listen(PORT, () => {
   console.log(`Server running at port ${PORT}`);
 });
