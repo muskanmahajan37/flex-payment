@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use('/payment', require('./api/routes/PaymentRouter'));
+app.use('/payments', require('./api/routes/PaymentRouter'));
+app.use('/customers', require('./api/routes/CustomerRouter'));
 
 const PORT = process.env.port || 8002;
 
