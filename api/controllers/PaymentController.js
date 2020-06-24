@@ -15,10 +15,8 @@ exports.getAllPayments = (req, res) => {
         payments,
       });
     })
-    .catch((err) => {
-      return res.status(500).json({
-        error: err,
-      });
+    .catch((error) => {
+      return res.status(500).json(error);
     });
 };
 
@@ -29,16 +27,13 @@ exports.getPaymentsByID = (req, res) => {
     .then((payment) => {
       return res.status(200).json(payment);
     })
-    .catch((err) => {
-      return res.status(500).json({
-        error: err,
-      });
+    .catch((error) => {
+      return res.status(500).json(error);
     });
 };
 
 exports.makePayment = (req, res) => {
   const { service, token } = req.body;
-
   const idempotencyKey = uuid();
 
   stripe.customers
@@ -70,16 +65,6 @@ exports.makePayment = (req, res) => {
       });
 
       newPayment.save().then((order) => {
-        console.log({
-          order: {
-            _id: order.id,
-            user: order.email,
-            serviceID: order.id,
-            serviceName: order.name,
-            price: order.price,
-            description: order.description,
-          },
-        });
         return res.status(200).json({
           order: {
             _id: order.id,
@@ -92,9 +77,20 @@ exports.makePayment = (req, res) => {
         });
       });
     })
-    .catch((err) => {
-      return res.status(500).json({
-        error: err,
-      });
+    .catch((error) => {
+      return res.status(500).json(error);
+    });
+};
+
+exports.deletePayment = (req, res) => {
+  Payment.remove({ _id: req.params.paymentId })
+    .exec()
+    .then(() => {
+      return res
+        .status(200)
+        .json(`Payment ${req.params.paymentId} Payment deleted`);
+    })
+    .catch((error) => {
+      return res.status(500).json(error);
     });
 };
