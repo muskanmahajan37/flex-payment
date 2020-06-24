@@ -20,13 +20,13 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('dev'));
 
-app.use('/payment', require('./api/routes/PaymentRouter'));
-
 app.get('/', (req, res) => {
   res.status(200).json({
     api: 'v.1',
   });
 });
+
+app.use('/payment', require('./api/routes/PaymentRouter'));
 
 const PORT = process.env.port || 8002;
 
