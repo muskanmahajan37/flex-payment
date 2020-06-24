@@ -5,9 +5,9 @@ const CustomerController = require('../controllers/CustomerController');
 
 const checkAuth = require('../middlewares/check-auth');
 
-router.get('/', checkAuth, CustomerController.getAllStripeCustomers);
-router.get('/:userId', checkAuth, CustomerController.getStripeCustomerByID);
-router.post('/', checkAuth, CustomerController.createStripeCustomer);
-router.delete('/:userId', checkAuth, CustomerController.deleteStripeCustomer);
+router.get('/', CustomerController.getAllStripeCustomers);
+router.get('/:userId', CustomerController.getStripeCustomerByID);
+router.post('/', CustomerController.createStripeCustomer);
+router.delete('/:userId', CustomerController.deleteStripeCustomer);
 
 module.exports = router;

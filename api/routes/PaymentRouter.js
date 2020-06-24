@@ -5,9 +5,9 @@ const PaymentController = require('../controllers/PaymentController');
 
 const checkAuth = require('../middlewares/check-auth');
 
-router.get('/', checkAuth, PaymentController.getAllPayments);
-router.get('/:paymentId', checkAuth, PaymentController.getPaymentsByID);
-router.post('/', checkAuth, PaymentController.makePayment);
-router.delete('/:paymentId', checkAuth, PaymentController.deletePayment);
+router.get('/', PaymentController.getAllPayments);
+router.get('/:paymentId', PaymentController.getPaymentsByID);
+router.post('/', PaymentController.makePayment);
+router.delete('/:paymentId', PaymentController.deletePayment);
 
 module.exports = router;
