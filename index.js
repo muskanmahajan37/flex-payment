@@ -28,10 +28,6 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get("/charge", (req, res) => {
-  res.status(200).json("Welcome to payment microservice!");
-});
-
 const PORT = process.env.port || 8002;
 
 app.listen(PORT, () => {
