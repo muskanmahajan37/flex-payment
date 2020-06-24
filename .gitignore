@@ -104,3 +104,8 @@ dist
 
 # TernJS port file
 .tern-port
+/.idea/vcs.xml
+/.idea/modules.xml
+/.idea/misc.xml
+/.idea/flex-payment.iml
+/.idea/.gitignore
