@@ -25,7 +25,7 @@ app.get("/charge", (req, res) => {
   res.status(200).json("Welcome to payment microservice!");
 });
 
-const PORT = process.env.port || 8002;
+const PORT = process.env.port || 8004;
 
 app.listen(PORT, () => {
   console.log(`Server running at port ${PORT}`);
