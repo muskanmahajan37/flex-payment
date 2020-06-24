@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 exports.getAllPayments = (req, res) => {
   Payment.find()
-    .select('user serviceID serviceName price description')
+    .select('_id user serviceID serviceName price description')
     .exec()
     .then((payments) => {
       return res.status(200).json({
@@ -22,7 +22,7 @@ exports.getAllPayments = (req, res) => {
 
 exports.getPaymentsByID = (req, res) => {
   Payment.findById({ _id: req.params.paymentId })
-    .select('user serviceID serviceName price description')
+    .select('_id user serviceID serviceName price description')
     .exec()
     .then((payment) => {
       return res.status(200).json(payment);
@@ -53,11 +53,10 @@ exports.makePayment = (req, res) => {
           idempotencyKey,
         }
       );
-    })
-    .then(() => {
+
       const newPayment = new Payment({
         _id: new mongoose.Types.ObjectId(),
-        user: token.email,
+        user: customer.id,
         serviceID: service.id,
         serviceName: service.name,
         price: service.price,
