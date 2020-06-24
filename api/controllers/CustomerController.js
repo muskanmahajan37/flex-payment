@@ -11,18 +11,41 @@ exports.getAllStripeCustomers = (req, res) => {
   });
 };
 
+exports.getStripeCustomerByID = (req, res) => {
+  stripe.customers.retrieve(req.params.userId, (err, customer) => {
+    if (err) {
+      res.status(500).json({ error: 'Something went wrong' });
+    } else {
+      res.status(200).json(customer);
+    }
+  });
+};
+
 exports.createStripeCustomer = (req, res) => {
   stripe.customers.create(
+    // Field for creating a customer are optional
     {
-      email: req.body.email,
-      name: req.body.email,
+      description: req.body.description,
     },
     (err, customer) => {
       if (err) {
         res.status(500).json({ error: 'Something went wrong' });
       } else {
-        res.status(200).json(customer);
+        res.status(200).json({
+          message: 'Customer created successfully',
+          createdCustomer: customer,
+        });
       }
     }
   );
+};
+
+exports.deleteStripeCustomer = (req, res) => {
+  stripe.customers.del(req.params.userId, (err, customer) => {
+    if (err) {
+      res.status(500).json({ error: 'Something went wrong' });
+    } else {
+      res.status(200).json({ message: 'Customer deleted successfully' });
+    }
+  });
 };
